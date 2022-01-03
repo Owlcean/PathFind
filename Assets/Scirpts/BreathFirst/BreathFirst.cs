@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class BreathFirst
+public static class BreadthFirst
 {
     private static Queue<Voxel> frontier;
     private static Dictionary<Voxel, Voxel> came_from;
     public static List<Voxel> Begin(Voxel startPoint, Voxel endPoint)
     {
+        frontier = new Queue<Voxel>();
         came_from = new Dictionary<Voxel, Voxel>();
         frontier.Enqueue(startPoint);
         while (frontier.Count != 0)
@@ -16,7 +17,7 @@ public static class BreathFirst
             List<Voxel>neighbours = GridMgr.GetInstance().GetNeighbour(currentGrid.x, currentGrid.z);
             foreach (Voxel item in neighbours)
             {
-                if (!came_from.ContainsKey(item))
+                if (!came_from.ContainsKey(item)&&item.reachable==true)
                 {
                     came_from[item] = currentGrid;
                     frontier.Enqueue(item);

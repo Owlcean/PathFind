@@ -19,6 +19,26 @@ public class GridMgr
                 GridData.GetInstance().GenVoxelEntity(i, j, gridAsset, parent);
     }
 
+    public void SetEndPoint(int x,int z)
+    {
+        GridData.GetInstance().SetEndPoint(x, z);
+    }
+
+    public void SetStartPoint(int x, int z)
+    {
+        GridData.GetInstance().SetStartPoint(x, z);
+    }
+
+    public Voxel GetEndPoint()
+    {
+        return GridData.GetInstance().GetEndPoint();
+    }
+
+    public Voxel GetStartPoint()
+    {
+        return GridData.GetInstance().GetStartPoint();
+    }
+
     public Voxel GetVoxcelByXZ(int x, int z)
     {
         return GridData.GetInstance().GetVoxcelByXZ(x, z);

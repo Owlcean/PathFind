@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Voxel 
 {
+    public static float gridLength { get { return 2.0f; } }
+    public static float gridWidth { get { return 1.0f; } }
+    public static float gridHeight { get { return 1.0f; } }
     public int x, z;
     public bool reachable;
     public bool hasReached;
@@ -21,7 +24,7 @@ public class Voxel
     {
         this.x = x;
         this.z = z;
-        go = GameObject.Instantiate(gridAsset, new Vector3(this.x, 0, this.z), Quaternion.identity, parent);
+        go = GameObject.Instantiate(gridAsset, new Vector3(this.x* gridLength, 0* gridWidth, this.z* gridWidth), Quaternion.identity, parent);
     }
     public void SetReachable(bool reachable)
     {
@@ -30,5 +33,19 @@ public class Voxel
     public void SetHasReached(bool hasReached)
     {
         this.hasReached = hasReached;
+    }
+    public void SetUnReachable()
+    {
+        reachable = false;
+        go.GetComponent<MeshRenderer>().material.color = Color.red;
+    }
+    public void SetReachable()
+    {
+        reachable = true;
+        go.GetComponent<MeshRenderer>().material.color = Color.green;
+    }
+    public void SetColor(Color color)
+    {
+        go.GetComponent<MeshRenderer>().material.color = color;
     }
 }

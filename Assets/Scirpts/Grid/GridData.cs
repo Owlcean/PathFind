@@ -5,6 +5,8 @@ using UnityEngine;
 public class GridData
 {
     private static GridData _instance;
+    private Voxel startPoint;
+    private Voxel endPoint;
     public static GridData GetInstance()
     {
         if (_instance == null) _instance = new GridData();
@@ -23,7 +25,39 @@ public class GridData
     {
         int index = z * len + x;
         voxels[index] = new Voxel(x, z, gridAsset, parent);
+        if (Random.Range(1, 99) > 90)
+        {
+            voxels[index].SetUnReachable();
+        }
+        else
+        {
+            voxels[index].SetReachable();
+        }
     }
+    public void SetStartPoint(int x,int z)
+    {
+        int index = z * len + x;
+        startPoint = voxels[index];
+        voxels[index].SetReachable();
+        voxels[index].SetColor(Color.yellow);
+    }
+    public Voxel GetStartPoint()
+    {
+        return startPoint;
+    }
+
+    public void SetEndPoint(int x, int z)
+    {
+        int index = z * len + x;
+        endPoint = voxels[index];
+        voxels[index].SetReachable();
+        voxels[index].SetColor(Color.yellow);
+    }
+    public Voxel GetEndPoint()
+    {
+        return endPoint;
+    }
+
     public Voxel GetVoxcelByXZ(int x, int z)
     {
         int index = z * len + x;
@@ -54,5 +88,15 @@ public class GridData
             neighbours.Add(GetVoxcelByXZ(x, z + 1));
         }
         return neighbours;
+    }
+
+    public int GetLength()
+    {
+        return len;
+    }
+
+    public int GetWidth()
+    {
+        return width;
     }
 }

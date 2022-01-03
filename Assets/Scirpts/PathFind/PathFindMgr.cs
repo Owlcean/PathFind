@@ -4,10 +4,10 @@ using UnityEngine;
 
 public static class PathFindMgr
 {
-    public static void BeginPathFind(int startX, int startY, int endX, int endY)
+    public static List<Voxel> BeginPathFind(Voxel start,Voxel end)
     {
-        Voxel startPoint = GridMgr.GetInstance().GetVoxcelByXZ(startX, startY);
-        Voxel endPoint = GridMgr.GetInstance().GetVoxcelByXZ(endX, endY);
-        BreathFirst.Begin(startPoint, endPoint);
+        Voxel startPoint = GridMgr.GetInstance().GetVoxcelByXZ(start.x, start.z);
+        Voxel endPoint = GridMgr.GetInstance().GetVoxcelByXZ(end.x, end.z);
+        return BreadthFirst.Begin(startPoint, endPoint);
     }
 }
